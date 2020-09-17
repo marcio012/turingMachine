@@ -23,20 +23,24 @@ public class LogicMacine {
         valorDireita = cadeia.substring(1);
     }
 
-    public void executar() {
+    public boolean executar() {
+        boolean status;
         do{
-            checarEstado();
-
+            status = checarEstado();
         }while(!estadoAtual.equals(estadoAceitacao));
+
+
         System.out.println("CADEIIIA ACEITA");
         System.out.println(valorEsquerda+valorAtual+valorDireita);
+        return status;
     }
 
-    public void checarEstado() {
+    public boolean checarEstado() {
         boolean aux = false;
         if(estadoAtual.equals(estadoAceitacao)) {
             System.out.println("Cadeia aceita");
             //ACEITO, mostrar no console
+            aux = true;
         }else {
             for (String linha : algoritmo) {
                 if(checarRegra(linha)) {
@@ -45,12 +49,15 @@ public class LogicMacine {
                     break;
                 }
             }
-            //pensar aquii!!
+
             if(!aux) {
                 System.out.println("cadeiia não aceiita");
                 System.out.println(valorEsquerda+valorAtual+valorDireita);
+                aux = false;
+                return true;
             }
         }
+        return aux;
     }
 
     public boolean checarRegra(String linha) {
