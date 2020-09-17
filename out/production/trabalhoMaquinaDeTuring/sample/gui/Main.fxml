@@ -6,7 +6,6 @@
 
 <AnchorPane fx:id="anchorPaneId" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
    <children>
-       <Label layoutX="27.0" layoutY="21.0" text="Fita" />
        <TextField fx:id="inputFita" alignment="CENTER" layoutX="24.0" layoutY="45.0" opacity="0.6" prefHeight="68.0" prefWidth="652.0" promptText="FITA">
            <font>
                <Font size="36.0" />
@@ -18,8 +17,8 @@
 
 <!--       <Button fx:id="btnCarregarAlgoritmo" layoutX="21.0" layoutY="450.0" mnemonicParsing="false" onAction="#onBtnCarregarAlgoritmo" prefHeight="27.0" prefWidth="200.0" text="Carregar" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />-->
 
-       <TextField fx:id="textFiledInputTest" layoutX="238.0" layoutY="154.0" promptText="input sequência" />
-       <Button fx:id="btnStringTest" layoutX="399.0" layoutY="154.0" mnemonicParsing="false" onAction="#onBtnInputTest" text="stringTeste" wrapText="true" />
+       <TextField fx:id="textFiledInputTest" layoutX="238.0" layoutY="155.0" promptText="input sequência" />
+       <Button fx:id="btnStringTest" layoutX="399.0" layoutY="155.0" mnemonicParsing="false" onAction="#onBtnInputTest" text="stringTeste" wrapText="true" />
 
 
        <Button fx:id="btnInicio" layoutX="240.0" layoutY="213.0" mnemonicParsing="false" onAction="#onActionInit" text="Início" textFill="#05a122" />
@@ -27,8 +26,17 @@
        <Button layoutX="552.0" layoutY="213.0" mnemonicParsing="false" text="Passo" textFill="#ab9519" />
        <Button layoutX="449.0" layoutY="213.0" mnemonicParsing="false" text="Limpar" textFill="#a000c4" />
 
-       <Label layoutX="244.0" layoutY="280.0" prefHeight="17.0" prefWidth="64.0" text="Resultado:" />
-       <TextArea layoutX="244.0" layoutY="305.0" prefHeight="172.0" prefWidth="426.0" />
+       <Label layoutX="240.0" layoutY="271.0" prefHeight="17.0" prefWidth="64.0" text="Resultado:" />
+
+       <Label fx:id="cadeiaResultado" alignment="CENTER" layoutX="240.0" layoutY="298.0" prefHeight="50.0"
+              prefWidth="435.0" text="10101" textAlignment="CENTER" textFill="#02eb16">
+           <font>
+               <Font name="Andale Mono" size="43.0" />
+           </font>
+       </Label>
+
+       <Label fx:id="cadeiaResultadoMensagem" alignment="CENTER" layoutX="240.0" layoutY="359.0"
+              prefHeight="27.0" prefWidth="435.0" style="-fx-background-color: #10e108;" text="Cadeia Aceita." textAlignment="CENTER" textFill="WHITE" />
 
    </children>
 </AnchorPane>
