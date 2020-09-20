@@ -1,0 +1,18 @@
+# Cadeia 0011 -> trocar 1100
+# ou seja essa cadeia aceita tudo
+# q0,0,q1,0,>
+# q0 -> estado inicial
+# 0 -> numero lido
+# q1 -> proximo estado
+# 0 -> valor escrito
+# > -> deslocamento do cabeçote
+# qAccept -> estadp final o que espera ser aceito
+
+q0
+qAccept
+q0,0,q0,1,>
+q0,1,q0,0,>
+q0,_,q1,_,<
+q1,1,q1,1,<
+q1,0,q1,0,<
+q1,_,qAccept,_,-

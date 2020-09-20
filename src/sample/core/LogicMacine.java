@@ -4,44 +4,54 @@ import java.util.ArrayList;
 
 public class LogicMacine {
 
-    private String estadoAtual;
+    private String estadoInicial;
     private String estadoAceitacao;
-    private ArrayList<String> algoritmo;
-    private String valorAtual = "";
-    private String valorDireita = "";
-    private String valorEsquerda = "";
+    private ArrayList<String> algoritmo = new ArrayList<String>();
+    private String cadeia;
+
+    private String estado;
+
+    private String valorEsquerdaDoCabecote = "";
+    private String valorAtualDoCabecote = "";
+    private String valorDireitaDoCabecote = "";
+
+    private String estadoFinalDaFita;
+
 
     public LogicMacine(ArrayList<String> regras, String cadeia) {
-        estadoAtual = regras.get(0);
-        estadoAceitacao = regras.get(1);
-        algoritmo = new ArrayList<String>();
+        this.cadeia = cadeia;
+        estadoInicial = regras.get(0);  // q0
+        estadoAceitacao = regras.get(1);  // qAccept
         for(int i = 2; i < regras.size(); i++) {
-            algoritmo.add(regras.get(i));
+            // pego as regras e passo para o array algoritmo
+            this.algoritmo.add(regras.get(i));
         }
-        valorAtual = cadeia.substring(0,1);
-        valorEsquerda = "";
-        valorDireita = cadeia.substring(1);
+        // valor da posição inicial do cabeçote
+        valorAtualDoCabecote = this.cadeia.substring(0,1);
+        // valor da posição a esqueda do inicial cabeçote
+        valorEsquerdaDoCabecote = "";
+        // valor da posição a direita do inicial cabeçote
+        valorDireitaDoCabecote = this.cadeia.substring(1);
     }
 
+//    public boolean executar() {
+//        boolean status ;
+//        do {
+//            status = checarEstado();
+//        }while (!this.estado.equals("Final"));
+//        System.out.println("CADEIIIA ACEITA");
+//        System.out.println(valorEsquerdaDoCabecote+valorAtualDoCabecote+valorDireitaDoCabecote);
+//        return status;
+//    }
+
     public boolean executar() {
-        boolean status;
-        do{
-            status = checarEstado();
-        }while(!estadoAtual.equals(estadoAceitacao));
-
-
-        System.out.println("CADEIIIA ACEITA");
-        System.out.println(valorEsquerda+valorAtual+valorDireita);
-        return status;
+        return checarEstado();
     }
 
     public boolean checarEstado() {
         boolean aux = false;
-        if(estadoAtual.equals(estadoAceitacao)) {
+//        if(!this.estado.equals("Final")) {
             System.out.println("Cadeia aceita");
-            //ACEITO, mostrar no console
-            aux = true;
-        }else {
             for (String linha : algoritmo) {
                 if(checarRegra(linha)) {
                     aux = true;
@@ -49,57 +59,65 @@ public class LogicMacine {
                     break;
                 }
             }
-
-            if(!aux) {
-                System.out.println("cadeiia não aceiita");
-                System.out.println(valorEsquerda+valorAtual+valorDireita);
-                aux = false;
-                return true;
-            }
-        }
+//        }
         return aux;
     }
 
     public boolean checarRegra(String linha) {
+
+        /*
+            Todo:
+            Lembrando que as linhas aqui estão entrando no formato de
+            q0,0,q1,0,> por isso o split se faz necessário
+        */
+
         String array[] = new String[5];
         array = linha.split(",");
         String valorEstado = array[0];
         String valorCelula = array[1];
-        if(valorCelula.equals(valorAtual) && valorEstado.equals(estadoAtual)) {
-            return true;
-        }
-        return false;
+
+        return (valorCelula.equals(valorAtualDoCabecote) & valorEstado.equals(estadoInicial));
     }
 
     public void executarPasso(String linha) {
         String array[] = new String[5];
         array = linha.split(",");
         //	String valorEstado = array[0];
-        //	String valorAtual = array[1];
+        //	String valorAtualDoCabecote = array[1];
         String novoEstado = array[2];
         String novoValor = array[3];
         String movimento = array[4];
         System.out.println("New value " + novoValor +  "  New State " + novoEstado + " movimento: " +movimento);
-        this.valorAtual = array[3];
+        this.valorAtualDoCabecote = array[3];
         moverFita(movimento);
-        this.estadoAtual = novoEstado;
+        this.estadoInicial = novoEstado;
     }
 
     public void moverFita(String movimento) {
         if(movimento.equals("<")) {
-            if (valorEsquerda.length() == 0) {
-                valorEsquerda = "_";
+            if (valorEsquerdaDoCabecote.length() == 0) {
+                valorEsquerdaDoCabecote = "_";
             }
-            valorDireita = valorAtual + valorDireita;
-            valorAtual = valorEsquerda.substring(valorEsquerda.length() - 1);
-            valorEsquerda = valorEsquerda.substring(0, valorEsquerda.length() - 1);
+            valorDireitaDoCabecote = valorAtualDoCabecote + valorDireitaDoCabecote;
+            valorAtualDoCabecote = valorEsquerdaDoCabecote.substring(valorEsquerdaDoCabecote.length() - 1);
+            valorEsquerdaDoCabecote = valorEsquerdaDoCabecote.substring(0, valorEsquerdaDoCabecote.length() - 1);
         }else {
-            if (valorDireita.length() == 0) {
-                valorDireita = "_";
+            if (valorDireitaDoCabecote.length() == 0) {
+                valorDireitaDoCabecote = "_";
             }
-            valorEsquerda = valorEsquerda + valorAtual;
-            valorAtual = valorDireita.substring(0,1);
-            valorDireita = valorDireita.substring(1);
+            valorEsquerdaDoCabecote = valorEsquerdaDoCabecote + valorAtualDoCabecote;
+            valorAtualDoCabecote = valorDireitaDoCabecote.substring(0,1);
+            valorDireitaDoCabecote = valorDireitaDoCabecote.substring(1);
         }
+    }
+
+    public String atualizaFita() {
+        if (this.cadeia.length() == 0)
+            valorAtualDoCabecote = "_";
+//        lblTapeLeft.setText(TapeLeft);
+//        lblTapeCurrent.setText(TapeCurrent);
+//        lblTapeRight.setText(TapeRight);
+//        lblState.setText("State: " + State + "   ");
+        return "Estado: " + estadoInicial;
     }
 }

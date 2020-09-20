@@ -9,11 +9,7 @@ public class LeitorArquivo {
     public ArrayList<String> LoadFile(String inputAlgoritmo) {
         logica = new ArrayList<String>();
         String[] arrayAlgoritmo = inputAlgoritmo.split("\n");
-        String estadoInicial = arrayAlgoritmo[0];
-        String estadoFinal = arrayAlgoritmo[1];
-        logica.add(estadoInicial);
-        logica.add(estadoFinal);
-        for (int i = 2; i < arrayAlgoritmo.length; i++) {
+        for (int i = 0; i < arrayAlgoritmo.length; i++) {
             logica.add(arrayAlgoritmo[i]);
         }
         return logica;
