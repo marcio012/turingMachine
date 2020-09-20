@@ -259,30 +259,47 @@ public class Controller implements Initializable {
     }
 
     private void checarEstado() {
+        boolean aux = true;
         do
         {
-            checarEstadoPasos();
-        }while (!estadoInicial.equals("FINAL"));
-
-        cadeiaResultado.setTextFill(Color.web("#02eb16"));
-        cadeiaResultado.setFont(Font.font(30));
-        cadeiaResultado.setText(textFiledInputTest.getText());
-        cadeiaResultadoMensagem.setVisible(true);
-        cadeiaResultadoMensagem.setText("Cadeia Aceita");
+            aux = checarEstadoPasos();
+        } while (aux);
 
     }
 
-    private void checarEstadoPasos() {
-        if(!estadoInicial.equals("FINAL")) {
+    private boolean checarEstadoPasos() {
+
+        if(estadoInicial.equals("FINAL")) {
+            System.out.println("Cadeia aceita");
+            cadeiaResultado.setTextFill(Color.web("#02eb16"));
+            cadeiaResultado.setFont(Font.font(30));
+            cadeiaResultado.setText(textFiledInputTest.getText());
+            cadeiaResultadoMensagem.setVisible(true);
+            cadeiaResultadoMensagem.setText("Cadeia Aceita");
+            return false;
+
+        } else {
+
             System.out.println(estadoInicial);
             for (String linha : algoritmoRegras) {
                 if(checarRegra(linha)) {
                     executarPasso(linha);
                     atualizaFita();
-                    break;
+                    return true;
                 }
             }
+
+            System.out.println("Cadeia rejeitada");
+
+            cadeiaResultado.setTextFill(Color.web("#eb0202"));
+            cadeiaResultado.setFont(Font.font(30));
+            cadeiaResultado.setText(textFiledInputTest.getText());
+            cadeiaResultadoMensagem.setVisible(true);
+            cadeiaResultadoMensagem.setText("Cadeia Rejeitada");
+            cadeiaResultadoMensagem.setStyle("-fx-background-color: #eb0202;");
+            return false;
         }
+
     }
 
     private boolean checarRegra(String linha) {
@@ -602,15 +619,6 @@ public class Controller implements Initializable {
                 break;
 
         }
-
-//        fita_9E
-//        fita_9D => fita_?D
-//        lblTapeLeft.setText(TapeLeft);
-//        lblTapeCurrent.setText(TapeCurrent);
-//        lblTapeRight.setText(TapeRight);
-//        lblState.setText("State: " + State + "   ");
-
-
 
         labelEstado.setText("Estado: " + estadoInicial + ".");
     }

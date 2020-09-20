@@ -16,3 +16,14 @@ q0,_,q1,_,<
 q1,1,q1,1,<
 q1,0,q1,0,<
 q1,_,qAccept,_,-
+
+
+0001
+
+qini
+qf
+qini,0,qini,0,>
+qini,1,qini,1,>
+qini,_,q1,_,<
+q1,1,q2,1,<
+q2,0,qf,0,-
