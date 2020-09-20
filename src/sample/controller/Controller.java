@@ -264,11 +264,11 @@ public class Controller implements Initializable {
             checarEstadoPasos();
         }while (!estadoInicial.equals("FINAL"));
 
-//        cadeiaResultado.setTextFill(Color.web("#02eb16"));
-//        cadeiaResultado.setFont(Font.font(30));
-//        cadeiaResultado.setText(textFiledInputTest.getText());
-//        cadeiaResultadoMensagem.setVisible(true);
-//        cadeiaResultadoMensagem.setText("Cadeia Aceita");
+        cadeiaResultado.setTextFill(Color.web("#02eb16"));
+        cadeiaResultado.setFont(Font.font(30));
+        cadeiaResultado.setText(textFiledInputTest.getText());
+        cadeiaResultadoMensagem.setVisible(true);
+        cadeiaResultadoMensagem.setText("Cadeia Aceita");
 
     }
 
