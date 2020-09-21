@@ -157,7 +157,7 @@ public class Controller implements Initializable {
         if (inputAlgoritmo.getText().length() == 0 || inputAlgoritmo.getText().isEmpty()) {
             //TODO: colocar um alert na interface aqui
             System.out.println("Entre com o algoritmo");
-            efeitoFade(cadeiaResultado, 3000, 10, 0);
+//            efeitoFade(cadeiaResultado, 6000, 10, 0);
             cadeiaResultado.setTextFill(Color.web("#eb0202"));
             cadeiaResultado.setFont(Font.font(16));
             cadeiaResultado.setText("Máquina não esta carregada! Entre com o algoritmo");
@@ -167,7 +167,7 @@ public class Controller implements Initializable {
         if (textFiledInputTest.getText().length() == 0 || textFiledInputTest.getText().isEmpty()) {
             //TODO: colocar um alert na interface aqui
             System.out.println("Entre com o a string de teste");
-            efeitoFade(cadeiaResultado, 3000, 10, 0);
+//            efeitoFade(cadeiaResultado, 6000, 10, 0);
             cadeiaResultado.setTextFill(Color.web("#eb0202"));
             cadeiaResultado.setFont(Font.font(16));
             cadeiaResultado.setText("Máquina não esta carregada! Entre com a sequencia de teste.");
@@ -196,7 +196,7 @@ public class Controller implements Initializable {
         logicMachine(algoritmo, valorDeEntradaInputadaNaFita);
 
         if (!algoritmo.isEmpty() && !textFiledInputTest.getText().isEmpty()) {
-            efeitoFade(cadeiaResultado, 6000, 10, 0);
+//            efeitoFade(cadeiaResultado, 6000, 10, 0);
             cadeiaResultado.setTextFill(Color.web("#02eb16"));
             cadeiaResultado.setFont(Font.font(22));
             cadeiaResultado.setText("Algoritmo carregado!");
@@ -210,7 +210,7 @@ public class Controller implements Initializable {
             checarEstado();
         }
         else {
-            efeitoFade(cadeiaResultado, 6000, 10, 0);
+//            efeitoFade(cadeiaResultado, 6000, 10, 0);
             cadeiaResultado.setTextFill(Color.web("#eb0202"));
             cadeiaResultado.setFont(Font.font(22));
             cadeiaResultado.setText("Máquina ou a cadeia não estão carregadas!");
@@ -226,7 +226,7 @@ public class Controller implements Initializable {
             checarEstadoPasos();
         }
         else {
-            efeitoFade(cadeiaResultado, 6000, 10, 0);
+//            efeitoFade(cadeiaResultado, 6000, 10, 0);
             cadeiaResultado.setTextFill(Color.web("#eb0202"));
             cadeiaResultado.setFont(Font.font(22));
             cadeiaResultado.setText("Máquina ou a cadeia não estão carregadas!");
