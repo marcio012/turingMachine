@@ -65,7 +65,7 @@ public class Controller implements Initializable {
 
     private String estadoInicial;
     private String estadoAceitacao;
-    private final ArrayList<String> algoritmoRegras = new ArrayList<>();
+    private final ArrayList<String> algoritmoRegras = new ArrayList<String>();
 
     private String cadeia;
 
@@ -276,6 +276,7 @@ public class Controller implements Initializable {
             cadeiaResultado.setText(textFiledInputTest.getText());
             cadeiaResultadoMensagem.setVisible(true);
             cadeiaResultadoMensagem.setText("Cadeia Aceita");
+            cadeiaResultadoMensagem.setStyle("-fx-background-color: #02eb16;");
             return false;
 
         } else {
