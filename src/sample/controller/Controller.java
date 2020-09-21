@@ -111,7 +111,7 @@ public class Controller implements Initializable {
 
     @FXML
     public void onActionClean() {
-        /*TODO: limpar os campos na lista*/
+        labelEstado.setText("Estado: ");
         cadeiaResultado.setText("");
         estadoInicial = "";
         estadoAceitacao = "";
@@ -155,9 +155,7 @@ public class Controller implements Initializable {
     public void onLoadMachine() {
 
         if (inputAlgoritmo.getText().length() == 0 || inputAlgoritmo.getText().isEmpty()) {
-            //TODO: colocar um alert na interface aqui
             System.out.println("Entre com o algoritmo");
-//            efeitoFade(cadeiaResultado, 6000, 10, 0);
             cadeiaResultado.setTextFill(Color.web("#eb0202"));
             cadeiaResultado.setFont(Font.font(16));
             cadeiaResultado.setText("Máquina não esta carregada! Entre com o algoritmo");
@@ -165,9 +163,7 @@ public class Controller implements Initializable {
         }
 
         if (textFiledInputTest.getText().length() == 0 || textFiledInputTest.getText().isEmpty()) {
-            //TODO: colocar um alert na interface aqui
             System.out.println("Entre com o a string de teste");
-//            efeitoFade(cadeiaResultado, 6000, 10, 0);
             cadeiaResultado.setTextFill(Color.web("#eb0202"));
             cadeiaResultado.setFont(Font.font(16));
             cadeiaResultado.setText("Máquina não esta carregada! Entre com a sequencia de teste.");
@@ -178,25 +174,9 @@ public class Controller implements Initializable {
         algoritmo = arquivo.LoadFile(inputAlgoritmo.getText());
         valorDeEntradaInputadaNaFita = textFiledInputTest.getText();
 
-        // TODO:
-        //  Colocar underscore no inicio da fita.
-
-
-        System.out.println(algoritmo.toString());
-        System.out.println(valorDeEntradaInputadaNaFita);
-
-        // TODO:
-        //  aqui somente carrega o algoritmo
-        //  Colocar underscore no inicio da fita.
-
-        /*Todo:
-        *  seta os valores na fita */
-
-
         logicMachine(algoritmo, valorDeEntradaInputadaNaFita);
 
         if (!algoritmo.isEmpty() && !textFiledInputTest.getText().isEmpty()) {
-//            efeitoFade(cadeiaResultado, 6000, 10, 0);
             cadeiaResultado.setTextFill(Color.web("#02eb16"));
             cadeiaResultado.setFont(Font.font(22));
             cadeiaResultado.setText("Algoritmo carregado!");
@@ -210,7 +190,6 @@ public class Controller implements Initializable {
             checarEstado();
         }
         else {
-//            efeitoFade(cadeiaResultado, 6000, 10, 0);
             cadeiaResultado.setTextFill(Color.web("#eb0202"));
             cadeiaResultado.setFont(Font.font(22));
             cadeiaResultado.setText("Máquina ou a cadeia não estão carregadas!");
@@ -226,12 +205,10 @@ public class Controller implements Initializable {
             checarEstadoPasos();
         }
         else {
-//            efeitoFade(cadeiaResultado, 6000, 10, 0);
             cadeiaResultado.setTextFill(Color.web("#eb0202"));
             cadeiaResultado.setFont(Font.font(22));
             cadeiaResultado.setText("Máquina ou a cadeia não estão carregadas!");
         }
-
 
     }
 
@@ -242,19 +219,14 @@ public class Controller implements Initializable {
 
     private void logicMachine(ArrayList<String> regras, String sequenciaInput) {
 
-        /*TODO: aqui so roda quando e feito o carregamento do algoritmo*/
         cadeia = sequenciaInput;
-        estadoInicial = regras.get(0);  // q0
-        estadoAceitacao = regras.get(1);  // qAccept
+        estadoInicial = regras.get(0);
+        estadoAceitacao = regras.get(1);
         for(int i = 2; i < regras.size(); i++) {
-            // pego as regras e passo para o array algoritmo
             algoritmoRegras.add(regras.get(i));
         }
-        // valor da posição inicial do cabeçote
         valorAtualDoCabecote = cadeia.substring(0,1);
-        // valor da posição a esqueda do inicial cabeçote
         valorEsquerdaDoCabecote = "";
-        // valor da posição a direita do inicial cabeçote
         valorDireitaDoCabecote = cadeia.substring(1);
     }
 
@@ -270,7 +242,6 @@ public class Controller implements Initializable {
     private boolean checarEstadoPasos() {
 
         if(estadoInicial.equals("FINAL")) {
-            System.out.println("Cadeia aceita");
             cadeiaResultado.setTextFill(Color.web("#02eb16"));
             cadeiaResultado.setFont(Font.font(30));
             cadeiaResultado.setText(textFiledInputTest.getText());
@@ -289,8 +260,6 @@ public class Controller implements Initializable {
                     return true;
                 }
             }
-
-            System.out.println("Cadeia rejeitada");
 
             cadeiaResultado.setTextFill(Color.web("#eb0202"));
             cadeiaResultado.setFont(Font.font(30));
@@ -316,28 +285,23 @@ public class Controller implements Initializable {
     private void executarPasso(String linha) {
         String array[] = new String[5];
         array = linha.split(",");
-        String linhaEstado = array[0]; // estou no estado -> q0
-        String linhaValor = array[1]; //  leio -> 0
-        String linhaNovoEstado = array[2]; // mudo o estado para -> q1
-        String linhaNovoValor = array[3]; // gravo o valor de -> 0
-        String linhaMovimento = array[4]; // ando para -> >
+        String linhaEstado = array[0];
+        String linhaValor = array[1];
+        String linhaNovoEstado = array[2];
+        String linhaNovoValor = array[3];
+        String linhaMovimento = array[4];
 
-        System.out.println("Estou em " + linhaEstado +  " leio " + linhaValor + " vou para o estado " + linhaNovoEstado + " gravo " + linhaNovoValor + " ando para " + linhaMovimento);
-
-        // Set the new value
         // o linhaNovoValor != "*"
-        if (!linhaNovoValor.equals("_")) {
+        if (!linhaNovoValor.equals("*")) {
             valorAtualDoCabecote = linhaNovoValor;
         }
 
-        // Move the tape or halt
         if (linhaMovimento.equals("<")) {
             moverFita("esquerda");
         } else if (linhaMovimento.equals(">")) {
             moverFita("direita");
         }
 
-        // Set the new state
         if (linhaNovoEstado.equals(estadoAceitacao))
             estadoInicial = "FINAL";
         else
@@ -367,9 +331,6 @@ public class Controller implements Initializable {
         if (cadeia.length() == 0) {
             valorAtualDoCabecote = "_";
         }
-        System.out.println("Valor a esquerda do Cabeçote ->> " + valorEsquerdaDoCabecote);
-        System.out.println("Valor atual do Cabeçote ->> " + valorAtualDoCabecote);
-        System.out.println("Valor a direita do Cabeçote ->> " + valorDireitaDoCabecote);
 
         fita_0.setText(valorAtualDoCabecote);
         char[] charsE = valorEsquerdaDoCabecote.toCharArray();
